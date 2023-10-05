@@ -1,8 +1,15 @@
 apache
+chdir
 colcon
 iterdir
+noqa
 pathlib
+plugin
 pytest
+rstrip
+scott
 scspell
 setuptools
+subparser
+subparsers
 thomas
