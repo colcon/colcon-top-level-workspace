@@ -93,4 +93,8 @@ def get_workspace_root():
     if not marker.is_file():
         logger.info(f"Marking root folder: {_root_path}")
         marker.touch()
+
+    # set default log path
+    if not os.environ.get("COLCON_LOG_PATH"):
+        os.environ["COLCON_LOG_PATH"] = str(_root_path / "log")
     return _root_path
