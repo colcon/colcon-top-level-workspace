@@ -54,9 +54,18 @@ class TopLevelWorkspaceArgumentDecorator(ActionCollectorDecorator):
                 return value
             return os.path.abspath(os.path.join(get_workspace_root(), str(value)))
 
+        def resolve_root_argument(value):
+            if value == "ROOT":
+                return str(get_workspace_root())
+            return value
+
         for arg in self.ROOT_FOLDER_ARGS:
             if arg in args:
                 add_type_resolver(kwargs, resolve_path)
+
+        for arg in ["--base-paths"]:
+            if arg in args:
+                add_type_resolver(kwargs, resolve_root_argument)
 
         return super().add_argument(*args, **kwargs)
 
