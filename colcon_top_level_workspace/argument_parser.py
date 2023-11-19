@@ -84,7 +84,10 @@ def get_workspace_root():
             return True
         return all([(path / folder).is_dir() for folder in ["log", "build", "install"]])
 
-    path = Path.cwd()
+    # get logical working directory (with symlinks not resolved)
+    path = os.environ.get("PWD")
+
+    path = Path(path) if path is not None else Path.cwd()
     _root_path = path
     anchor = Path(path.anchor)
     while True:
